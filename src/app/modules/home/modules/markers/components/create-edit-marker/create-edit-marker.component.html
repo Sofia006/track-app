@@ -1,0 +1,56 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="close()">
+        <ion-icon name="close-circle-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>
+      Create marker
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="begin()" size="large" color="danger"
+                  [disabled]="!selectedAddress">
+        <ion-icon name="add-circle-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <div style="position: relative">
+    <div class="flex-row-space-between align-center">
+      <ion-searchbar
+        debounce=500
+        (ionChange)="searchStart($event); $event.stopImmediatePropagation()"
+        [value]="selectedAddress?.place_name"
+        placeholder="Search address"
+      >
+      </ion-searchbar>
+      <ion-button (click)="setCurrentLocation()" color="light" size="small">
+        <ion-icon name="locate-outline"></ion-icon>
+      </ion-button>
+    </div>
+    <div style="position: absolute; width: 100%; z-index: 999;">
+      <ion-list lines="none" *ngIf="addresses.length > 0">
+        <ion-item button *ngFor="let address of addresses" (click)="onSelect(address)">
+          <ion-icon name="pin"></ion-icon>
+          {{ address.place_name }}
+        </ion-item>
+      </ion-list>
+    </div>
+  </div>
+
+  <ion-list *ngIf="selectedAddress" class="qo-margin-top30">
+    <ion-list-header>
+      Place info
+    </ion-list-header>
+
+    <ion-item>
+      <ion-label>
+        <h2><b>Address:</b> {{selectedAddress.place_name}}</h2>
+        <h2><b>Latitude:</b> {{selectedAddress.center[1]}}</h2>
+        <h2><b>Longitude:</b> {{selectedAddress.center[0]}}</h2>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>

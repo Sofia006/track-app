@@ -1,0 +1,74 @@
+<ion-content fullscreen>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content
+      pullingText="Pull to update"
+      refreshingText="Updating...">
+    </ion-refresher-content>
+  </ion-refresher>
+  <div
+    class="ion-content-margin"
+  >
+    <div class="t-spinner" *ngIf="isTripsLoading$ | async">
+      <div class="loader"></div>
+    </div>
+    <div *ngIf="!(isTripsLoading$ | async)">
+      <div class="stats">
+        <ion-grid>
+          <ion-row>
+            <ion-col>
+              <ion-card>
+                <ion-card-header>
+                  <ion-card-title>Km</ion-card-title>
+                  <ion-card-subtitle>{{kmToday}}</ion-card-subtitle>
+                </ion-card-header>
+              </ion-card>
+            </ion-col>
+            <ion-col>
+              <ion-card>
+                <ion-card-header>
+                  <ion-card-title>Trips</ion-card-title>
+                  <ion-card-subtitle>{{trips.length}} </ion-card-subtitle>
+                </ion-card-header>
+              </ion-card>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </div>
+      <ion-list>
+        <ion-list-header>
+          Today trips
+        </ion-list-header>
+
+        <app-trip-list-view
+          [trips]="trips"
+          (deleteTrip)="deleteTrip($event)"
+        ></app-trip-list-view>
+      </ion-list>
+    </div>
+  </div>
+
+</ion-content>
+<ion-fab
+  vertical="bottom"
+  horizontal="start"
+  slot="fixed"
+  *ngIf="!(isTripsLoading$ | async)"
+
+>
+  <ion-fab-button [color]="tripStatus?.tripActive ? 'danger' : 'success'" (click)="startEndTrip()">
+    <ion-icon [name]="tripStatus?.tripActive ? 'stop-outline': 'play-outline'"></ion-icon>
+  </ion-fab-button>
+</ion-fab>
+<ion-fab vertical="bottom" horizontal="end" slot="fixed" *ngIf="!(isTripsLoading$ | async)">
+  <ion-fab-button>
+    <ion-icon name="add-circle"></ion-icon>
+  </ion-fab-button>
+  <ion-fab-list side="top">
+    <ion-fab-button (click)="add()" color="warning">
+      <ion-icon name="map-outline"></ion-icon>
+    </ion-fab-button>
+    <ion-fab-button (click)="addFromExisting()" color="success">
+      <ion-icon name="navigate-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab-list>
+</ion-fab>

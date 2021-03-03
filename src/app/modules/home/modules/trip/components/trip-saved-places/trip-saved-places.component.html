@@ -1,0 +1,51 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="close()">
+        <ion-icon name="close-circle-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>
+      New trip
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="begin()" size="large" color="danger" [disabled]="!trip">
+        <ion-icon name="caret-forward-circle-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-item>
+    <ion-label>Origin</ion-label>
+    <ion-select [(ngModel)]="selectedOrigin" (ionChange)="setOrigin()">
+      <ion-select-option
+        *ngFor="let data of selectorData; let i = index"
+        [value]="data"
+      >
+        {{data.placeName}}
+      </ion-select-option>
+    </ion-select>
+  </ion-item>
+  <ion-item [disabled]="!selectedOrigin">
+    <ion-label>Destination</ion-label>
+    <ion-select [(ngModel)]="selectedDestination" (ionChange)="selectDestination()">
+      <ion-select-option *ngFor="let data of selectorData" [value]="data">{{data.placeName}}</ion-select-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-list *ngIf="trip" class="qo-margin-top30">
+    <ion-list-header>
+      Trip info
+    </ion-list-header>
+
+    <ion-item>
+      <ion-label>
+        <h2><b>Origin:</b> {{trip.origin}}</h2>
+        <h2><b>Destination:</b> {{trip.destination }}</h2>
+        <p><b>Distance:</b> {{(trip.distance / 1000).toFixed(2) + ' km'}}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+</ion-content>

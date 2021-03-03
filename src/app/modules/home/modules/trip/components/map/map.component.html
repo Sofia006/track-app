@@ -1,0 +1,66 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="close()">
+        <ion-icon name="close-circle-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>
+      New trip
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="begin()" size="large" color="danger"
+                  [disabled]="!selectedStartAddress || !selectedEndAddress">
+        <ion-icon name="caret-forward-circle-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<div class="map-header">
+  <div style="position: relative">
+    <div class="flex-row-space-between align-center">
+      <ion-searchbar
+        debounce=500
+        (ionChange)="searchStart($event); $event.stopImmediatePropagation()"
+        [value]="selectedStartAddress?.place_name"
+        placeholder="Origin"
+      >
+      </ion-searchbar>
+      <ion-button (click)="setCurrentLocation(1)" color="light" size="small">
+        <ion-icon name="locate-outline"></ion-icon>
+      </ion-button>
+    </div>
+
+    <div style="position: absolute; width: 100%; z-index: 999;">
+      <ion-list lines="none" *ngIf="startAdresses.length > 0">
+        <ion-item button *ngFor="let address of startAdresses" (click)="onSelectStart(address)">
+          <ion-icon name="pin"></ion-icon>
+          {{ address.place_name }}
+        </ion-item>
+      </ion-list>
+    </div>
+  </div>
+  <div style="position: relative">
+    <div class="flex-row-space-between align-center">
+      <ion-searchbar
+        debounce=500
+        (ionChange)="search($event)"
+        [value]="selectedEndAddress?.place_name"
+        placeholder="Destination"
+      ></ion-searchbar>
+      <ion-button (click)="setCurrentLocation(2)" color="light" size="small" [disabled]="!selectedStartAddress">
+        <ion-icon name="locate-outline"></ion-icon>
+      </ion-button>
+    </div>
+
+    <div style="position: absolute; width: 100%; z-index: 999;">
+      <ion-list lines="none" *ngIf="endAddresses.length > 0">
+        <ion-item button *ngFor="let address of endAddresses" (click)="onSelect(address)">
+          <ion-icon name="pin"></ion-icon>
+          {{ address.place_name }}
+        </ion-item>
+      </ion-list>
+    </div>
+  </div>
+</div>
+<div id="map" class="match-parent" (click)="$event.preventDefault();"></div>

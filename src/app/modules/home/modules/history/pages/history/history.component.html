@@ -1,0 +1,38 @@
+<ion-content fullscreen>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content
+      pullingText="Pull to update"
+      refreshingText="Updating...">
+    </ion-refresher-content>
+  </ion-refresher>
+  <div class="ion-content-margin">
+    <ion-item>
+      <ion-label>From Date</ion-label>
+      <ion-datetime [(ngModel)]="dateRange.begin" placeholder="Select Date" (ionChange)="dateChange()"></ion-datetime>
+    </ion-item>
+    <ion-item>
+      <ion-label>To Date</ion-label>
+      <ion-datetime [(ngModel)]="dateRange.end" placeholder="Select Date" (ionChange)="dateChange()"></ion-datetime>
+    </ion-item>
+    <div class="t-spinner" *ngIf="isLoading$ | async">
+      <div class="loader"></div>
+    </div>
+    <div class="qo-margin-top30" *ngIf="!(isLoading$ | async)">
+      <ion-list>
+        <ion-list-header>
+          Trips
+        </ion-list-header>
+        <app-trip-list-view
+          [trips]="trips$ | async"
+          (deleteTrip)="delete($event)"
+        ></app-trip-list-view>
+      </ion-list>
+    </div>
+  </div>
+</ion-content>
+
+<ion-fab vertical="bottom" horizontal="end" slot="fixed" *ngIf="!(isLoading$ | async)">
+  <ion-fab-button (click)="exportExcel()">
+    <ion-icon name="download-outline"></ion-icon>
+  </ion-fab-button>
+</ion-fab>

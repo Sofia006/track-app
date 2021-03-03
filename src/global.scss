@@ -1,0 +1,384 @@
+@import "~@ionic/angular/css/core.css";
+/* Basic CSS for apps built with Ionic */
+@import "~@ionic/angular/css/normalize.css";
+@import "~@ionic/angular/css/structure.css";
+@import "~@ionic/angular/css/typography.css";
+@import "~@ionic/angular/css/display.css";
+/* Optional CSS utils that can be commented out */
+@import "~@ionic/angular/css/padding.css";
+@import "~@ionic/angular/css/float-elements.css";
+@import "~@ionic/angular/css/text-alignment.css";
+@import "~@ionic/angular/css/text-transformation.css";
+@import "~@ionic/angular/css/flex-utils.css";
+// @import "~@fullcalendar/core/main.css";
+// @import "~@fullcalendar/daygrid/main.css";
+// @import "~@fullcalendar/timegrid/main.css";
+@import "~ngx-toastr/toastr";
+
+ion-picker {
+  touch-action: none;
+}
+
+app-e-tabs ion-router-outlet > .ion-page {
+  animation: fadeIn 0.3s 1 forwards;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 3vh, 0);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+// ::: COLOR SCHEME :::
+$color-red: #d33333;
+$color-grey1: #f2f2f2;
+$color-grey2: #e2e2e2;
+$color-grey3: #b7b7b7;
+$color-grey4: #888888;
+$color-golden-brown: #b6987b;
+$color-black: #000000;
+$color-white: #ffffff;
+$color-green: #70cf74;
+$color-orange: #ffa133;
+$color-olive-green: #9ed686;
+$color-turquoise: #00c1d4;
+$color-purple: #8c54ff;
+$color-transparent: transparent;
+
+
+.qo-table-border-add {
+  border: 1px solid $color-grey2;
+  width: 100%;
+  border-radius: 8px;
+}
+
+// tables
+.qo-table {
+  width: 100%;
+  border-collapse: collapse;
+
+  tbody {
+    border-radius: 8px;
+  }
+
+  .category-row {
+    background-color: $color-grey1;
+    height: 50px;
+    width: 100%;
+    text-align: left;
+    border-bottom: 1px solid $color-grey2;
+
+    th {
+      width: 50px;
+      font-size: 14px !important;
+      font-weight: 600;
+      color: $color-grey4;
+      transition: all 0.2s;
+      outline: none;
+      align-items: center;
+    }
+
+    th:first-child {
+      border-top-left-radius: 8px;
+    }
+
+    th:last-child {
+      border-top-right-radius: 8px;
+    }
+
+    th:hover {
+      color: $color-black;
+    }
+
+    .small-width {
+      width: 50px !important;
+    }
+  }
+
+  // .data-row:hover {
+  //   background-color: $color-grey1;
+  // }
+  .data-row:last-child {
+    td:first-child {
+      border-bottom-left-radius: 8px;
+    }
+
+    td:last-child {
+      border-bottom-right-radius: 8px;
+    }
+  }
+
+  .data-row:last-child {
+    border-bottom: none;
+  }
+
+  .data-row {
+    td:nth-child(3n + 1) {
+      text-align: left !important;
+    }
+  }
+
+  .data-row {
+    height: 60px;
+    background-color: $color-white;
+    color: $color-black;
+    text-align: center;
+    border-bottom: solid 1px $color-grey2;
+
+    td {
+      padding-right: 10px;
+    }
+  }
+}
+
+.loader {
+  border: 15px solid #f3f3f3;
+  border-radius: 60%;
+  border-top: 16px solid #ff1a1a;
+  width: 100px;
+  height: 100px;
+  zoom: 0.8;
+  -webkit-animation: spin 2s linear infinite;
+  /* Safari */
+  animation: spin 2s linear infinite;
+  margin: 0 auto;
+}
+
+
+/* Safari */
+
+@-webkit-keyframes spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.modal-wrapper {
+  border-radius: 8px !important;
+  //min-width: 50vw !important;
+  min-height: 50vh !important;
+}
+
+@media screen and (max-width: 800px) {
+  .modal-wrapper {
+    border-radius: 0 !important;
+  }
+  .modal-fullscreen {
+    .modal-wrapper {
+      position: absolute;
+      top: 0;
+      left: 0;
+      display: block;
+      width: 100%;
+      height: 100%;
+
+      .card {
+        height: unset !important;
+        min-height: 100vh !important;
+      }
+    }
+  }
+}
+
+.card-footer {
+  position: sticky;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.modal-wrapper {
+  .card {
+    height: 100% !important;
+  }
+}
+
+.modal-wrapper-fullscreen {
+  .modal-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+
+    .card {
+      height: unset !important;
+      min-height: 100vh !important;
+    }
+
+    border-radius: 0 !important;
+  }
+}
+
+input:focus, textarea:focus {
+  box-shadow: 0 0 5px rgba(81, 203, 238, 1);
+  border: 1px solid rgba(81, 203, 238, 1);
+}
+
+.flex-row-space-between {
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.flex-row-top-left {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+
+.flex-row-center-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.flex-col-top-left {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+}
+
+.padding10 {
+  padding: 10px;
+}
+
+.padding15 {
+  padding: 15px;
+}
+
+.padding20 {
+  padding: 20px;
+}
+
+.flex-row-top-right {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-end;
+}
+
+.qo-margin-top30 {
+  margin-top: 30px;
+}
+
+.title {
+  font-weight: 600;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+}
+
+.title.big {
+  font-size: 30px;
+}
+
+.title.medium {
+  font-size: 20px;
+}
+
+.title.small {
+  font-size: 16px;
+}
+
+.full-width {
+  width: 100% !important;
+}
+
+.my-card {
+  border-radius: 5px;
+  border: solid 1px #e2e2e2;
+  background-color: #ffffff;
+}
+
+.padding20 {
+  padding: 20px;
+}
+
+.align-center {
+  align-items: center;
+}
+
+::ng-deep .timepicker-dial__control, .timepicker-dial__control, .timepicker-dial__item, .timepicker-dial__item_active {
+  outline: none !important;
+}
+
+.margin-top10 {
+  margin-top: 10px;
+}
+
+button.mat-menu-item {
+  outline: none !important;
+}
+
+.deactivated {
+  text-decoration: line-through !important;
+}
+
+.button-round {
+  width: 34px;
+  height: 34px;
+  border-radius: 34px !important;
+  display: flex !important;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.center-h-v {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+}
+
+.green {
+  color: #00cc00;
+}
+
+.orange {
+  color: #ffb380;
+}
+
+.input-textarea {
+  height: 50px;
+  word-break: break-word;
+}
+
+.ion-content-margin {
+  margin-top: 44px;
+}
+
+.alertDanger {
+  color: red !important;
+}
+
+.t-spinner {
+  display: flex;
+  height: 90vh;
+  justify-content: center;
+  align-items: center;
+}

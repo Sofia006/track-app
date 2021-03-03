@@ -1,0 +1,51 @@
+<!-- Page content -->
+<ion-content>
+  <div class="container mt--5 pb-3 login-box">
+    <div class="row justify-content-center">
+      <div class="col-lg-5 col-md-7">
+        <div class="card bg-secondary shadow border-0">
+          <div class="card-body">
+            <div class="text-center text-muted mb-4">
+              <h2>SIGN IN</h2>
+            </div>
+            <form role="form">
+              <div class="form-group mb-3">
+                <div class="input-group input-group-alternative">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="ni ni-email-83"></i></span>
+                  </div>
+                  <input class="form-control" name="email" [(ngModel)]="email" placeholder="Email" type="email">
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="input-group input-group-alternative">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
+                  </div>
+                  <input
+                    class="form-control"
+                    name="password"
+                    [(ngModel)]="password"
+                    placeholder="Password"
+                    (keyup.enter)="login()"
+                    type="password">
+                </div>
+              </div>
+              <div class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-primary my-4"
+                  (click)="login()"
+                  [disabled]="!email || !password"
+                >
+                  Sign in
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="loader" *ngIf="(isLoading$ | async)"></div>
+</ion-content>

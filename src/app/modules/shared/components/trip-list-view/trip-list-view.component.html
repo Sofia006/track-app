@@ -1,0 +1,13 @@
+<ion-item
+  *ngFor="let trip of trips"
+  (click)="showTrip(trip)"
+  [class.active-trip]="trip.tripStart && !trip.tripEnd"
+>
+  <ion-label>
+    <h2><b>Origin:</b> {{trip.origin}}</h2>
+    <h2><b>Destination:</b> {{trip.destination }}</h2>
+    <h4><b>Trip start: </b> {{trip.tripStart | localDate:'HH:mm'}}</h4>
+    <h4><b>Trip end: </b> {{trip.tripEnd | localDate:'HH:mm'}}</h4>
+    <p><b>Distance:</b> {{trip.distance ? (trip.distance / 1000).toFixed(2) + ' km' : ''}}</p>
+  </ion-label>
+</ion-item>
